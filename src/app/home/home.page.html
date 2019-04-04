@@ -1,14 +1,31 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Denuncias
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content padding>
+    <div padding>
+  <ion-label>Digite sua denuncia: </ion-label> <br>
+  <ion-input  [(ngModel)]="body" type="text" name="mensagem" placeholder="Escreva uma mensagem..." > </ion-input> <br>
+  <ion-button type="submit" (click)="getSimData()" (click)="enviar()" >Enviar</ion-button> <br>
+</div>
+
+</ion-item>
+<ion-list *ngIf="simInfo">
+    <ion-item> <b> Código de país: </b> {{simInfo.countryCode}} </ion-item>  
+  </ion-list>
+  <ion-card  *ngFor= "let card of cards" >
+    <ion-card-header>
+      {{card.carrierName}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item><b>Latitude: </b> {{lat}} </ion-item>
+        <ion-item><b>Longitude: </b> {{long}} </ion-item>
+        <ion-item><b>IMEI: </b> {{ card.deviceId }} </ion-item>
+        <ion-item><b>Operadora: </b> {{ card.displayName }}</ion-item> 
+      </ion-list>
 </ion-content>
