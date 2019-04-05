@@ -6,14 +6,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <div padding>
-  <ion-label>Digite sua denuncia: </ion-label> <br>
+<ion-content>
+  <ion-list lines="none">
+  <ion-item>Faça uma denuncia: </ion-item><br>
+</ion-list>
   <ion-input  [(ngModel)]="body" type="text" name="mensagem" placeholder="Escreva uma mensagem..." > </ion-input> <br>
-  <ion-button type="submit" (click)="getSimData()" (click)="enviar()" >Enviar</ion-button> <br>
-</div>
+  <ion-button type="submit" (click)="getSimData()" (click)="enviar()" (click)="local()" >Enviar</ion-button> <br>
 
-</ion-item>
 <ion-list *ngIf="simInfo">
     <ion-item> <b> Código de país: </b> {{simInfo.countryCode}} </ion-item>  
   </ion-list>
@@ -23,9 +22,12 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item><b>Latitude: </b> {{lat}} </ion-item>
-        <ion-item><b>Longitude: </b> {{long}} </ion-item>
+        <ion-item><b>Latitude: </b> {{ lat }} </ion-item>
+        <ion-item><b>Longitude: </b> {{ long }} </ion-item>
         <ion-item><b>IMEI: </b> {{ card.deviceId }} </ion-item>
         <ion-item><b>Operadora: </b> {{ card.displayName }}</ion-item> 
       </ion-list>
+      </ion-card-content>
+      </ion-card>
+    
 </ion-content>

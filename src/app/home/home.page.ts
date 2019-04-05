@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { Sim } from '@ionic-native/sim/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +10,25 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class HomePage {
 
+  constructor(public  sim: Sim, public geolocation: Geolocation, public emailComposer: EmailComposer) { }
+  
   public simInfo: any;
   public cards: any;
-  lat: number;
-  long: number;
   subject='Denuncia';
   body='';
   to='tsuiya.hachiman@gmail.com';
+  lat: number;
+  long: number;
 
-  constructor(private emailComposer: EmailComposer, private geolocation: Geolocation, private sim: Sim) { }
+  local(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat = resp.coords.latitude;
+      this.long = resp.coords.longitude;
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+    }
 
-  
   enviar(){
     let email = {
       to: this.to,
@@ -44,15 +51,6 @@ export class HomePage {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  local(){
-  this.geolocation.getCurrentPosition().then((resp) => {
-    this.lat = resp.coords.latitude;
-    this.long = resp.coords.longitude;
-   }).catch((error) => {
-     console.log('Error getting location', error);
-   });
   }
 
 }
